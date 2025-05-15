@@ -11,14 +11,14 @@ function generateRandomString(length: number) {
 
 export async function GET() {
   const state = generateRandomString(16)
-  const scope = 'playlist-read-private playlist-modify-public playlist-modify-private'
+  const authScope = 'playlist-read-private playlist-modify-public playlist-modify-private user-read-private user-read-email'
 
   console.log('Redirect URI:', redirect_uri);
 
   const queryParams = querystring.stringify({
     response_type: 'code',
     client_id,
-    scope,
+    authScope,
     redirect_uri,
     state,
   })
