@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     const state = req.nextUrl.searchParams.get('state');
 
   if (!code || !state) {
-    return NextResponse.redirect('/?error=missing_code_or_state')
+    return NextResponse.redirect(`${req.nextUrl.origin}/?error=missing_code_or_state`)
   }
 
   try {
@@ -31,11 +31,11 @@ export async function GET(req: NextRequest) {
       }
     )
 
-    const { access_token } = response.data
+    const { access_token } = response.data;
 
     // TODO: averiguar para guardar el token en una cookie
-    return NextResponse.redirect(`/dashboard?access_token=${access_token}`)
+    return NextResponse.redirect(`${req.nextUrl.origin}/dashboard?access_token=${access_token}`);
   } catch (error) {
-    return NextResponse.redirect('/?error=token_failed')
+    return NextResponse.redirect(`${req.nextUrl.origin}/?error=token_failed`);
   }
 }
