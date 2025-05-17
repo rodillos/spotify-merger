@@ -1,4 +1,11 @@
-export default function Home() {
+import { redirect } from 'next/navigation'
+import { getValidAccessToken } from '@/lib/getValidAccessToken';
+
+export default async function Home() {
+
+  const accessToken = await getValidAccessToken();
+  accessToken && redirect('/dashboard');
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-2xl mb-4">Spotify Login Demo</h1>
